@@ -1372,6 +1372,7 @@ integer myproc
                          nssl_cnor, nssl_cnos,                   &
                          nssl_rho_qh, nssl_rho_qhl,              &
                          nssl_rho_qs,                            &
+                nssl_alphar,nssl_ehw0,nssl_ehlw0,       & ! JRL
                 ccn_conc,                                        & ! RAS
                 z_at_q, inv_dens, qnwfa2d, scalar, num_sc,      &  ! G. Thompson
                 ids, ide, jds, jde, kds, kde,                   &
