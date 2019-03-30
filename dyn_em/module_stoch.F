@@ -854,7 +854,19 @@ IF (grid%sppt_on==1) then
                                        kte_stoch,kme_stoch
 
        REAL , DIMENSION(ims:ime , kms:kme, jms:jme),INTENT(INOUT) ::   &
-                                        ru_tendf, rv_tendf, t_tendf,moist_tend
+! JRL ---------------------
+                                        !ru_tendf, rv_tendf, t_tendf,moist_tend
+                                        rw_tendf, t_tendf,moist_tend,  &
+                                        wvar2, tvar, qvar
+
+        REAL , DIMENSION(ims:ime,jms:jme),INTENT(INOUT) :: L_INF
+        REAL, INTENT(IN) :: ashc,aml,dx,dt
+        REAL :: ash ! Local variable
+        REAL, DIMENSION(ims:ime,kms:kme,jms:jme), INTENT(OUT) :: qtend_og, qtend_pert &
+                               ,ttend_og, ttend_pert &
+                               ,wtend_og, wtend_pert
+        CHARACTER*128 :: john_message ! No idea what this is, yet...
+! --------------------------------
        REAL , DIMENSION(ims:ime,kms:kme_stoch, jms:jme),INTENT(INOUT) :: rstoch
        REAL :: gridpt_stddev_sppt ,thresh,sppt_thresh_fact
 
