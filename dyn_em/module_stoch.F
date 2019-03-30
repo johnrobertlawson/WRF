@@ -889,34 +889,175 @@ IF (grid%sppt_on==1) then
          ENDDO
        ENDDO
 
+! JRL -------
+! Initialise
+qtend_og = 0.0
+qtend_pert = 0.0
+ttend_og = 0.0
+ttend_pert = 0.0
+wtend_og = 0.0
+wtend_pert = 0.0
+
+! Testing
+l_inf = 0.0
+
+
 ! Perturb the tendencies of u,v,q,t.
+!DO j = jts,MIN(jde-1,jte)
+!         DO k = kts,kte-1
+!         kh = min( k, kte_stoch-1 )
+!           DO i = its,ite
+!              ru_tendf(i,k,j)      = ru_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
+!           ENDDO
+!         ENDDO
+!       ENDDO
+!
+!       DO j = jts,jte
+!         DO k = kts,kte-1
+!         kh = min( k, kte_stoch-1 )
+!            DO i = its,MIN(ide-1,ite)
+!              rv_tendf(i,k,j)      = rv_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
+!           ENDDO
+!         ENDDO
+!       ENDDO
+!
+!       DO j = jts,MIN(jde-1,jte)
+!         DO k = kts,kte-1
+!         kh = min( k, kte_stoch-1 )
+!           DO i = its,MIN(ide-1,ite)
+!              moist_tend(i,k,j)    = moist_tend(i,k,j)*(1.0 + rstoch(i,kh,j))
+!              t_tendf   (i,k,j)    =    t_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
+!           ENDDO
+!         ENDDO
+!       ENDDO
+
+! Perturbing in PSP
        DO j = jts,MIN(jde-1,jte)
          DO k = kts,kte-1
          kh = min( k, kte_stoch-1 )
            DO i = its,ite
-              ru_tendf(i,k,j)      = ru_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
-           ENDDO
-         ENDDO
-       ENDDO
+             ! If l_inf wasn't computed, use the default in namelist for asympt.
+             ! mixing length.
+             if (l_inf(i,j) < 2.5) then
+                 l_inf(i,j) = aml
 
-       DO j = jts,jte
-         DO k = kts,kte-1
-         kh = min( k, kte_stoch-1 )
-            DO i = its,MIN(ide-1,ite)
-              rv_tendf(i,k,j)      = rv_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
-           ENDDO
-         ENDDO
-       ENDDO
+             end if
+             ash = ashc * (l_inf(i,j)/(5.0*dx)) * (1.0/dt)
 
-       DO j = jts,MIN(jde-1,jte)
-         DO k = kts,kte-1
-         kh = min( k, kte_stoch-1 )
-           DO i = its,MIN(ide-1,ite)
-              moist_tend(i,k,j)    = moist_tend(i,k,j)*(1.0 + rstoch(i,kh,j))
-              t_tendf   (i,k,j)    =    t_tendf(i,k,j)*(1.0 + rstoch(i,kh,j))
-           ENDDO
-         ENDDO
-       ENDDO
+             wtend_og(i,k,j) = rw_tendf(i,k,j)
+             if (wvar2(i,k,j).eq.0.0) then
+                 ! No modification to rw_tendf.
+                 wtend_pert(i,k,j) = 0.0
+                 !print *,"parsnip wvar2 is 0 at i,j,k = ",i,j,k
+             elseif (.not.((wvar2(i,k,j) > 1e-20) .and. (wvar2(i,k,j) < 1e20))) then
+               !print *,"darjeeling weird value: wvar2 = ",wvar2(i,k,j), "at i,j,k =",i,j,k
+             else
+                 wtend_pert(i,k,j) = (ash*rstoch(i,kh,j)* sqrt((wvar2(i,k,j)/2.0)))
+                 rw_tendf(i,k,j) = wtend_og(i,k,j)+wtend_pert(i,k,j)
+             endif
+
+             qtend_og(i,k,j) = moist_tend(i,k,j)
+             if (qvar(i,k,j).eq.0.0) then
+               qtend_pert(i,k,j) = 0.0
+               !print *,"parsnip qvar is 0 at i,j,k = ",i,j,k
+             elseif (.not.((qvar(i,k,j) > 1e-20) .and. (qvar(i,k,j) < 1e20))) then
+               !print *,"darjeeling weird value: qvar = ",qvar(i,k,j), " at i,j,k =",i,j,k
+             else
+               qtend_pert(i,k,j) = (ash*rstoch(i,kh,j)* sqrt(qvar(i,k,j)))
+               moist_tend(i,k,j) = qtend_og(i,k,j)+qtend_pert(i,k,j)
+             end if
+
+             ttend_og(i,k,j) = t_tendf(i,k,j)
+             if (tvar(i,k,j).eq.0.0) then
+               ttend_pert(i,k,j) = 0.0
+               !print *,"parsnip tvar is 0 at i,j,k = ",i,j,k
+             elseif (.not.((tvar(i,k,j) > 1e-20) .and. (tvar(i,k,j) < 1e20))) then
+               !print *,"darjeeling weird value: tvar = ",tvar(i,k,j), " at i,j,k =", i,j,k
+             else
+               ttend_pert(i,k,j) = (ash*rstoch(i,kh,j)* sqrt(tvar(i,k,j)))
+               t_tendf(i,k,j) = ttend_og(i,k,j) + ttend_pert(i,k,j)
+             endif
+           END DO
+         END DO
+       END DO
+
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in tvar = ",maxval(tvar)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in qvar = ",maxval(qvar)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in wvar2 = ",maxval(wvar2)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in ttend_pert = ",maxval(ttend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in qtend_pert = ",maxval(qtend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in wtend_pert = ",maxval(wtend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in ttend_og = ",maxval(ttend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in qtend_og = ",maxval(qtend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "Max in wtend_og = ",maxval(wtend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "max in l_inf = ",maxval(l_inf)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in tvar = ",minval(tvar)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in qvar = ",minval(qvar)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in wvar2 = ",minval(wvar2)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in ttend_pert = ",minval(ttend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in qtend_pert = ",minval(qtend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in wtend_pert = ",minval(wtend_pert)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in ttend_og = ",minval(ttend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in qtend_og = ",minval(qtend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in wtend_og = ",minval(wtend_og)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "min in l_inf = ",minval(l_inf)
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "ash = ",ash
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "ashc = ",ashc
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "dx = ",dx
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "dt = ",dt
+      CALL wrf_debug(9999,john_message)
+       WRITE(john_message,FMT='(A,F6.1)' ) &
+      "aml = ",aml
+      CALL wrf_debug(9999,john_message)
+
+! -----------------------
 
       end subroutine perturb_physics_tend
 
