@@ -16,7 +16,7 @@ module module_stoch
 ! system are available in:
 !
 ! Berner, J.,  S.-Y. Ha, J. P. Hacker, A. Fournier and C. Snyder 2011:
-! "Model uncertainty in a mesoscale ensemble prediction system: Stochastic 
+! "Model uncertainty in a mesoscale ensemble prediction system: Stochastic
 ! versus multi-physics representations",  2011, Mon. Wea. Rev., 139, 1972-1995
 ! http://journals.ametsoc.org/doi/abs/10.1175/2010MWR3595.1
 !
@@ -94,7 +94,7 @@ contains
 !     ------------------------------------------------------------------
 !!************** INITIALIZE STOCHASTIC ROUTINES *****************************
 !     ------------------------------------------------------------------
-! This subroutine drives the initialization of the stochastic schemes  
+! This subroutine drives the initialization of the stochastic schemes
 
       SUBROUTINE INITIALIZE_STOCH  (grid, config_flags,                       &
                           first_trip_for_this_domain,                         &
@@ -331,7 +331,7 @@ IF (grid%sppt_on==1) then
 
      ENDIF ! skebs or sppt or rand_perturb or spp
 
-      END SUBROUTINE INITIALIZE_STOCH       
+      END SUBROUTINE INITIALIZE_STOCH
 
       !   --- END SETUP STOCHASTIC PERTURBATION SCHEMES ----------
 
@@ -544,7 +544,7 @@ IF (grid%sppt_on==1) then
 
      endif !is print
 !     --------------------------------------------------------------------------------------
-!     Compute Normalization constants       
+!     Compute Normalization constants
 !     --------------------------------------------------------------------------------------
 
      ZCHI    =  0.0
@@ -559,10 +559,10 @@ IF (grid%sppt_on==1) then
         if ((IK>0).or.(IL>0)) then
           if (variable == 'W') then
             ZCHI(IL+1,IK+1)=((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT/2.)  ! SKEBS :U
-            ZGAMMAN= ZGAMMAN + ((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT+1)        
+            ZGAMMAN= ZGAMMAN + ((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT+1)
           else if (variable == 'T') then
             ZCHI(IL+1,IK+1)=((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT/2.)  ! SKEBS :T
-            ZGAMMAN= ZGAMMAN + ((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT)          
+            ZGAMMAN= ZGAMMAN + ((IK/RY*IK/RY)+(IL/RX*IL/RX))**(REXPONENT)
           else if ((variable == 'P') .or. (variable == 'R') .or.  (variable == 'S') .or. (variable == 'O') .or.  (variable == 'Q     ')) then
             ZCHI(IL+1,IK+1)=exp(  -2*RPI**2*kappat*((IK/RY*IK/RY)+(IL/RX*IL/RX)) ) !SPPT
             ZGAMMAN= ZGAMMAN + exp(  -4*RPI**2*kappat*((IK/RY*IK/RY)+(IL/RX*IL/RX)) ) !SPPT
@@ -574,12 +574,12 @@ IF (grid%sppt_on==1) then
       ZGAMMAN=4.0*ZGAMMAN !account for all quadrants, although only one is Filled
       if (variable == 'W') then
          ZCONSTF0=SQRT(ALPH*TOT_BACKSCAT/(float(itime_step)*ZSIGMA2*ZGAMMAN))/(2*RPI)
-      elseif  (variable == 'T') then     
+      elseif  (variable == 'T') then
          ZCONSTF0=SQRT(T0*ALPH*TOT_BACKSCAT/(float(itime_step)*cp*ZSIGMA2*ZGAMMAN))
       elseif ((variable == 'P') .or. (variable == 'R') .or.  (variable == 'S') .or. (variable == 'O') .or.  (variable == 'Q     ')) then
          ZCONSTF0= gridpt_stddev_rand_perturb*sqrt((1.-phi**2)/(2.*ZGAMMAN))
       endif
-  
+
 
 !     --------------------------------------------------------------------------------------
 !     Now the wavenumber-dependent amplitudes
@@ -670,7 +670,7 @@ IF (grid%sppt_on==1) then
      INTEGER , INTENT(IN)     ::               ids, ide, jds, jde, kds, kde,   &
                                                ims, ime, jms, jme, kms, kme,   &
                                                its, ite, jts, jte, kts, kte
-   
+
      INTEGER, DIMENSION (kms:kme),             INTENT(INOUT) :: iseedarr
      INTEGER , ALLOCATABLE , DIMENSION(:) :: iseed
      REAL :: Z,ALPH
@@ -724,17 +724,17 @@ IF (grid%sppt_on==1) then
       DO IK=jts,jte
       if ((IK.le.(KMAX/2+1)) .and. (IK>1)) then ! Upper half
         DO IL=its,ite
-          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(IL,IK)  
-          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSS(IL,IK)  
+          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(IL,IK)
+          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSS(IL,IK)
         ENDDO
       ELSEIF (IK==1) then
         DO IL=its,ite
         if ((IL.le.(LMAX/2+1))) then
-          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(IL,IK)  
-          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSS(IL,IK)  
+          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(IL,IK)
+          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSS(IL,IK)
         elseif ((IL.gt.(LMAX/2+1))) then
-          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(LMAX-IL+2,IK)  
-          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      - SP_AMP(IL,IK)     * ZRANDNOSS(LMAX-IL+2,IK)  
+          SPFORCC(IL,IK)       = (1.-ALPH)*SPFORCC(IL,IK)      + SP_AMP(IL,IK)     * ZRANDNOSC(LMAX-IL+2,IK)
+          SPFORCS(IL,IK)       = (1.-ALPH)*SPFORCS(IL,IK)      - SP_AMP(IL,IK)     * ZRANDNOSS(LMAX-IL+2,IK)
         endif
         ENDDO
       ENDIF
@@ -789,7 +789,7 @@ IF (grid%sppt_on==1) then
        INTEGER :: I,J,K,kh
        REAL  :: dt,xm
 
-   
+
        DO j = jts,MIN(jde-1,jte)
          DO k = kts,kte-1
            kh=min(k,kte_stoch)
@@ -823,11 +823,20 @@ IF (grid%sppt_on==1) then
 !     ------------------------------------------------------------------
       subroutine perturb_physics_tend(gridpt_stddev_sppt,               &
                        sppt_thresh_fact,rstoch,                         &
-                       ru_tendf,rv_tendf,t_tendf,moist_tend,            &
+                       ! JRL ---------
+                       !ru_tendf,rv_tendf,t_tendf,moist_tend,            &
+                       rw_tendf,t_tendf,moist_tend,                     &
                        ids, ide, jds, jde, kds, kde,                    &
                        ims, ime, jms, jme, kms, kme,                    &
                        its, ite, jts, jte, kts, kte,                    &
-                       kte_stoch,kme_stoch                               )
+                       !kte_stoch,kme_stoch                               )
+                       kte_stoch,kme_stoch,                              &
+                       wvar2,tvar,qvar,ashc,aml,dx,dt,l_inf,            &
+                       qtend_og,qtend_pert,                  &
+                       ttend_og,ttend_pert,                  &
+                       wtend_og,wtend_pert                  )
+                        ! ------------
+
 
 !      This subroutine add stochastic perturbations of the form
 !
@@ -938,7 +947,7 @@ IF (grid%sppt_on==1) then
       INTEGER , INTENT(IN)     ::               ids, ide, jds, jde, kds, kde,   &
                                                 ims, ime, jms, jme, kms, kme,   &
                                                 ips, ipe, jps, jpe, kps, kpe,   &
-                                                kts, kte                       
+                                                kts, kte
       INTEGER , INTENT(IN)     ::               imsx,imex,jmsx,jmex,kmsx,kmex, &
                                                 ipsx,ipex,jpsx,jpex,kpsx,kpex, &
                                                 imsy,imey,jmsy,jmey,kmsy,kmey, &
@@ -947,7 +956,7 @@ IF (grid%sppt_on==1) then
 
       REAL    , INTENT(IN)     ::               ALPH_RAND,dx,dy,thresh_fact,gridpt_stddev
       INTEGER , INTENT(IN)     ::               skebs_vertstruc
-      CHARACTER, INTENT(IN)    ::               variable_in ! T, U, V                
+      CHARACTER, INTENT(IN)    ::               variable_in ! T, U, V
                                                ! T          ! random field, T
                                                ! U          ! first derivative of streamfunction with regard to y; for skebs: U
                                                ! V          ! first derivative of streamfunction with regard to x; for skebs: V
@@ -956,7 +965,7 @@ IF (grid%sppt_on==1) then
       REAL, DIMENSION(ims:ime,kms:kme, jms:jme),INTENT(IN)    :: VERTSTRUCC,VERTSTRUCS
       REAL, DIMENSION(ims:ime,jms:jme)         ,INTENT(INOUT) :: SPFORCS,SPFORCC,SP_AMP
       REAL, DIMENSION(kms:kme )                ,INTENT(IN)    :: VERTAMP
-      REAL, DIMENSION(ims:ime,kms:kme_stoch, jms:jme)         :: RAND_PERT  
+      REAL, DIMENSION(ims:ime,kms:kme_stoch, jms:jme)         :: RAND_PERT
       REAL                     ::               RY,RX
 
 
@@ -982,15 +991,15 @@ IF (grid%sppt_on==1) then
       !$OMP PARALLEL DO   &
       !$OMP PRIVATE ( ij )
        DO ij = 1 , grid%num_tiles
-             IF (variable .ne. 'V') THEN  !T, random field, U, don't update for V 
+             IF (variable .ne. 'V') THEN  !T, random field, U, don't update for V
               CALL UPDATE_STOCH( &
                          SPFORCS,SPFORCC,SP_AMP,ALPH_RAND,                   &
                          restart,iseedarr,                         &
                          ids, ide, jds, jde, kds, kde,                       &
                          ims, ime, jms, jme, kms, kme,                       &
-                         grid%i_start(ij), grid%i_end(ij), grid%j_start(ij), grid%j_end(ij), kts, kte                        )      
+                         grid%i_start(ij), grid%i_end(ij), grid%j_start(ij), grid%j_end(ij), kts, kte                        )
              endif
-  
+
 ! Put spectral coefficients in arrays RAND_REAL,RAND_IMAG
 
               IF (variable == 'T')   THEN  ! T, rand
@@ -1003,7 +1012,7 @@ IF (grid%sppt_on==1) then
                 ENDDO
               ENDDO
 
-              ELSEIF (variable == 'U') THEN !U  
+              ELSEIF (variable == 'U') THEN !U
               DO IK=grid%j_start(ij), grid%j_end(ij)
                DO ILEV=kts,kte_stoch
                 DO IL=grid%i_start(ij),grid%i_end(ij)
@@ -1013,7 +1022,7 @@ IF (grid%sppt_on==1) then
                 ENDDO
               ENDDO
 
-              ELSEIF (variable == 'V') THEN !V  
+              ELSEIF (variable == 'V') THEN !V
               DO IK=grid%j_start(ij), grid%j_end(ij)
                DO ILEV=kts,kte_stoch
                 DO IL=grid%i_start(ij),grid%i_end(ij)
@@ -1043,7 +1052,7 @@ IF (grid%sppt_on==1) then
        !$OMP END PARALLEL DO
 
 ! Transform spectral pattern to gridpoint space
-          
+
 #if ( defined( DM_PARALLEL ) && ( ! defined( STUBMPI ) ) )
 
 ! Roll out into latitude bands and perform FFT along latitude bands
@@ -1079,7 +1088,7 @@ IF (grid%sppt_on==1) then
         call do_fftback_along_x(grid%RAND_REAL_xxx,grid%RAND_IMAG_xxx,                  &
                               ids,ide,jds,jde,                                          &
                               imsx,imex,jmsx,jmex,kmsx,min(kmex,grid%num_stoch_levels), &
-                              ipsx,ipex,jpsx,jpex,kpsx,min(kpex,grid%num_stoch_levels))  
+                              ipsx,ipex,jpsx,jpex,kpsx,min(kpex,grid%num_stoch_levels))
 #include "XPOSE_RAND_REAL_x2z.inc"
 #include "XPOSE_RAND_IMAG_x2z.inc"
 
@@ -1130,7 +1139,7 @@ IF (grid%sppt_on==1) then
         call do_fftback_along_x(grid%RAND_REAL,grid%RAND_IMAG,                          &
                               ids,ide,jds,jde,                                          &
                               ims,ime,jms,jme,kms,min(kme,grid%num_stoch_levels),       &
-                              ips,ipe,jps,jpe,kps,min(kpe,grid%num_stoch_levels))   
+                              ips,ipe,jps,jpe,kps,min(kpe,grid%num_stoch_levels))
         call do_fftback_along_y(grid%RAND_REAL,grid%RAND_IMAG,                          &
                               ids,ide,jds,jde,                                          &
                               ims,ime,jms,jme,kms,min(kme,grid%num_stoch_levels),       &
@@ -1170,7 +1179,7 @@ IF (grid%sppt_on==1) then
                              ipsx,ipex,jpsx,jpex,kpsx,kpex,    &
                              ids,ide,jds,jde
 
-  
+
        REAL, DIMENSION    (imsx:imex, kmsx:kmex, jmsx:jmex) :: fieldc,fields
 
        COMPLEX, DIMENSION (ipsx:ipex)            :: dummy_complex
@@ -1222,7 +1231,7 @@ IF (grid%sppt_on==1) then
        INTEGER, INTENT(IN) :: imsy,imey,jmsy,jmey,kmsy,kmey,    &
                               ipsy,ipey,jpsy,jpey,kpsy,kpey,    &
                               ids,ide,jds,jde
-  
+
        REAL, DIMENSION    (imsy:imey, kmsy:kmey, jmsy:jmey) :: fieldc,fields
 
        COMPLEX, DIMENSION (jpsy:jpey)            :: dummy_complex
@@ -1255,7 +1264,7 @@ IF (grid%sppt_on==1) then
           END DO
         END DO ! k_start-k_end
 
-     
+
        DEALLOCATE(WORK)
        end subroutine do_fftback_along_y
 !     ------------------------------------------------------------------
@@ -1291,7 +1300,7 @@ IF (grid%sppt_on==1) then
       ENDDO
 
       END subroutine findindex
-       
+
 !     ------------------------------------------------------------------
      subroutine gauss_noise(z)
       real :: z                    ! output
