@@ -3871,6 +3871,8 @@ CALL lsm_mosaic_init(IVGTYP,config_flags%ISWATER,config_flags%ISURBAN,config_fla
    REAL, DIMENSION(20) :: nssl_params
    INTEGER    :: nssl_ipelec_tmp
 
+   REAL, INTENT(INOUT)         :: nssl_alphar,nssl_ehw0,nssl_ehlw0 ! JRL
+
    warm_rain = .false.
    adv_moist_cond = .true.
    itf=min0(ite,ide-1)
