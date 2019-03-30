@@ -3912,7 +3912,11 @@ CALL lsm_mosaic_init(IVGTYP,config_flags%ISWATER,config_flags%ISURBAN,config_fla
      nssl_params(10) = nssl_rho_qs
      nssl_params(11) = nssl_ipelec_tmp
      nssl_params(12) = nssl_isaund
-
+     ! JRL -------
+     nssl_params(15) = nssl_alphar
+     nssl_params(16) = nssl_ehw0
+     nssl_params(17) = nssl_ehlw0
+     ! ------------
    ENDIF
 
    mp_select: SELECT CASE(config_flags%mp_physics)
