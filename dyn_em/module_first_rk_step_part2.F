@@ -750,6 +750,7 @@ BENCH_END(update_phy_ten_tim)
                         grid%qtend_og,grid%qtend_pert,                       &
                         grid%ttend_og,grid%ttend_pert,                       &
                         grid%wtend_og,grid%wtend_pert                       )
+                        ! ----------------
 
            ENDDO
           !$OMP END PARALLEL DO
