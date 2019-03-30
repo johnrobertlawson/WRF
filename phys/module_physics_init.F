@@ -775,6 +775,8 @@ integer myproc
    REAL, OPTIONAL, DIMENSION( ims:ime, 1:num_soil_layers*mosaic_cat, jms:jme ), INTENT(INOUT) :: TGL_URB3D_mosaic
    LOGICAL :: IPRINT
 
+   REAL, INTENT(INOUT) :: nssl_alphar,nssl_ehw0,nssl_ehlw0 ! JRL
+
 !-------------------------------------------------
 ! End of Noah-mosaic
 !-------------------------------------------------
