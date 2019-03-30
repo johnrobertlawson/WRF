@@ -1032,6 +1032,7 @@ BENCH_START(pbl_driver_tim)
      &        ,NUM_VERT_MIX=grid%num_vert_mix                            &
 #endif
      &        ,QNORM=grid%QNORM, fasdas=config_flags%fasdas              & !fasdas
+     &        ,L_INF=grid%L_INF                                          & ! JRL
      &        )
 
 #if (WRF_CHEM == 1)
