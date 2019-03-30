@@ -650,7 +650,7 @@ CONTAINS
                                           ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
                                           its,ite, jts,jte, kts,kte )
 
-   END SUBROUTINE spec_bdy_chem_perturb   
+   END SUBROUTINE spec_bdy_chem_perturb
 
 
 
@@ -1220,7 +1220,7 @@ CONTAINS
                                                                 msftx,      &
                                                                 msfty
      REAL , DIMENSION( kms:kme ) , INTENT(IN   ) ::  znw
-  
+
      LOGICAL, INTENT(IN   ) :: fill_w_flag
 
 
@@ -1282,50 +1282,52 @@ CONTAINS
       ENDDO
 
 ! Fill the atmospheric w field with smoothly decaying values
-      IF (fill_w_flag) THEN
-        DO j = jts,min(jte,jde-1)
-        DO k = kts+1,kte
-        DO i = its,min(ite,ide-1)
-          w(i,k,j) = w(i,1,j)*znw(k)*znw(k)
-        ENDDO
-        ENDDO
-        ENDDO
-      ENDIF
+! JRL ------------
+!      IF (fill_w_flag) THEN
+!        DO j = jts,min(jte,jde-1)
+!        DO k = kts+1,kte
+!        DO i = its,min(ite,ide-1)
+!          w(i,k,j) = w(i,1,j)*znw(k)*znw(k)
+!        ENDDO
+!        ENDDO
+!        ENDDO
+!      ENDIF
+! --------------
 
   END SUBROUTINE set_w_surface
 
   SUBROUTINE lbc_fcx_gcx ( fcx , gcx , spec_bdy_width , &
                            spec_zone , relax_zone , dt , spec_exp , &
                            specified , nested )
-  
+
      IMPLICIT NONE
-  
+
      INTEGER , INTENT(IN) :: spec_bdy_width , spec_zone , relax_zone
      REAL , INTENT(IN) :: dt , spec_exp
      LOGICAL , INTENT(IN) :: specified , nested
      REAL , DIMENSION(spec_bdy_width) :: fcx , gcx
-  
+
      ! Local variables.
-  
+
      INTEGER :: loop
      REAL :: spongeweight
-  
+
      IF (specified) THEN
-       
+
        ! Arrays for specified boundary conditions
-       
+
        DO loop = spec_zone + 1, spec_zone + relax_zone
          fcx(loop) = 0.1 / dt * (spec_zone + relax_zone - loop) / (relax_zone - 1)
          gcx(loop) = 1.0 / dt / 50. * (spec_zone + relax_zone - loop) / (relax_zone - 1)
          spongeweight=exp(-(loop-(spec_zone + 1))*spec_exp)
          fcx(loop) = fcx(loop)*spongeweight
          gcx(loop) = gcx(loop)*spongeweight
-       ENDDO   
-       
+       ENDDO
+
      ELSE IF (nested) THEN
-       
+
        ! Arrays for specified boundary conditions
-       
+
        DO loop = spec_zone + 1, spec_zone + relax_zone
          fcx(loop) = 0.1 / dt * (spec_zone + relax_zone - loop) / (relax_zone - 1)
          gcx(loop) = 1.0 / dt / 50. * (spec_zone + relax_zone - loop) / (relax_zone - 1)
@@ -1335,9 +1337,9 @@ CONTAINS
 !        fcx(loop) = 0.
 !        gcx(loop) = 0.
        ENDDO
-       
+
      ENDIF
-  
+
   END SUBROUTINE lbc_fcx_gcx
 
 !------------------------------------------------------------------------
@@ -1743,5 +1745,5 @@ CONTAINS
       END DO
 
    END SUBROUTINE mass_weight
-  
+
 END MODULE module_bc_em
