@@ -5355,6 +5355,14 @@ ENDIF   ! CROPTYPE == 0
     REAL, DIMENSION(-NSNOW+1:NSOIL)              :: DTSDZ
     REAL, DIMENSION(-NSNOW+1:NSOIL)              :: EFLUX
     REAL                                         :: TEMP1
+    ! JRL -------
+    REAL,                         INTENT(IN)  :: MORPHR_TBOT
+    REAL,                         INTENT(IN)  :: MORPHTH_TBOT
+    REAL                                      :: DD1
+    REAL                                      :: DD2
+    REAL                                      :: WW2
+    ! -----------
+
 ! ----------------------------------------------------------------------
 
     DO K = ISNOW+1, NSOIL
