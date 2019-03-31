@@ -5246,8 +5246,11 @@ ENDIF   ! CROPTYPE == 0
                   STC       ,TBOT      ,ZBOTSNO   ,DT        , &
                   DF        ,HCPCT     ,SSOIL     ,PHI       , &
                   AI        ,BI        ,CI        ,RHSTS     , &
-                  EFLXB     )
-
+                  ! JRL -------
+                                    !EFLXB     )
+                                    EFLXB,MORPHR_TBOT, MORPHTH_TBOT     )
+                  ! ------------
+                  
       CALL HSTEP (parameters,NSNOW     ,NSOIL     ,ISNOW     ,DT        , &
                   AI        ,BI        ,CI        ,RHSTS     , &
                   STC       )
