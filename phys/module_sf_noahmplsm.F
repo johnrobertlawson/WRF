@@ -2549,6 +2549,11 @@ ENDIF   ! CROPTYPE == 0
   REAL,PARAMETER :: MPE = 1.E-6
   LOGICAL VEG  !true: vegetated for surface temperature calculation
 
+  ! JRL ------
+    REAL, INTENT(IN)                     :: MORPHR_RAD
+    REAL, INTENT(IN)                     :: MORPHTH_RAD
+  ! ---------
+
 ! --------------------------------------------------------------------------------------------------
 
 ! surface abeldo
