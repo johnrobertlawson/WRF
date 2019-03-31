@@ -5308,7 +5308,11 @@ ENDIF   ! CROPTYPE == 0
                   STC       ,TBOT      ,ZBOT      ,DT        , &
                   DF        ,HCPCT     ,SSOIL     ,PHI       , &
                   AI        ,BI        ,CI        ,RHSTS     , &
-                  BOTFLX    )
+                  ! JRL ---------
+                    !BOTFLX    )
+                    BOTFLX,MORPHR_TBOT, MORPHTH_TBOT)
+                  ! --------------
+
 ! ----------------------------------------------------------------------
 ! ----------------------------------------------------------------------
 ! calculate the right hand side of the time tendency term of the soil
