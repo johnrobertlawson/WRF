@@ -1782,6 +1782,27 @@ ENDIF   ! CROPTYPE == 0
   REAL, PARAMETER                   :: PSIWLT = -150.  !metric potential for wilting point (m)
   REAL, PARAMETER                   :: Z0     = 0.002  ! Bare-soil roughness length (m) (i.e., under the canopy)
 
+  ! JRL -----------------
+    REAL,                  INTENT(IN)  :: MORPHR_CRS
+    REAL,                  INTENT(IN)  :: MORPHTH_CRS
+    REAL,                  INTENT(IN)  :: MORPHR_RAD
+    REAL,                  INTENT(IN)  :: MORPHTH_RAD
+    REAL,                  INTENT(IN)  :: MORPHR_TBOT
+    REAL,                  INTENT(IN)  :: MORPHTH_TBOT
+    REAL,                  INTENT(IN)  :: MORPHR_BTR
+    REAL,                  INTENT(IN)  :: MORPHTH_BTR
+    REAL                               :: GX1
+    REAL                               :: GX2
+    REAL                               :: GX3
+    REAL                               :: DD1
+    REAL                               :: DD2
+    REAL                               :: DD3
+    REAL                               :: WW1
+    REAL                               :: WW2
+    REAL                               :: WW3
+
+  ! ---------------------
+
 ! ---------------------------------------------------------------------------------------------------
 ! initialize fluxes from veg. fraction
 
