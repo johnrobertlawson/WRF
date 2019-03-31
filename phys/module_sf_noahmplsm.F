@@ -1927,6 +1927,26 @@ ENDIF   ! CROPTYPE == 0
             GX    = 1.-EXP(-5.8*(LOG(PSIWLT/PSI)))
           END IF
 
+          ! JRL --------------------
+           IF (OPT_BTR == 11) then
+             GX1   = (SH2O(IZ)-parameters%SMCWLT(IZ)) / (parameters%SMCREF(IZ)-parameters%SMCWLT(IZ))
+             PSI   = MAX(PSIWLT,-parameters%PSISAT(IZ)*(MAX(0.01,SH2O(IZ))/parameters%SMCMAX(IZ))** &
+                          (-parameters%BEXP(IZ)) )
+             GX2   = (1.-PSI/PSIWLT)/(1.+parameters%PSISAT(IZ)/PSIWLT)
+             PSI   = MAX(PSIWLT,-parameters%PSISAT(IZ)*(MAX(0.01,SH2O(IZ))/parameters%SMCMAX(IZ))** &
+                          (-parameters%BEXP(IZ)) )
+             GX3   = 1.-EXP(-5.8*(LOG(PSIWLT/PSI)))
+
+             DD1 = SQRT(1.0+(MORPHR_BTR**2)-(2.0*MORPHR_BTR*COS(MORPHTH_BTR-((2*3.141)/1))))
+             DD2 = SQRT(1.0+(MORPHR_BTR**2)-(2.0*MORPHR_BTR*COS(MORPHTH_BTR-((2*3.141)/2))))
+             DD3 = SQRT(1.0+(MORPHR_BTR**2)-(2.0*MORPHR_BTR*COS(MORPHTH_BTR-((2*3.141)/3))))
+             WW1 = (1./DD1)/((1./DD1)+(1./DD2)+(1./DD3))
+             WW2 = (1./DD2)/((1./DD1)+(1./DD2)+(1./DD3))
+             WW3 = (1./DD3)/((1./DD1)+(1./DD2)+(1./DD3))
+             GX = WW1*GX1 + WW2*GX2 + WW3*GX3
+           END IF
+! -------------------------
+
           GX = MIN(1.,MAX(0.,GX))
           BTRANI(IZ) = MAX(MPE,DZSNSO(IZ) / (-ZSOIL(parameters%NROOT)) * GX)
           BTRAN      = BTRAN + BTRANI(IZ)
