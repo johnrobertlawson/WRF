@@ -3670,6 +3670,23 @@ ENDIF   ! CROPTYPE == 0
 
   character(len=80) ::  message
 
+  ! JRL ------
+  REAL, INTENT(IN) :: MORPHR_CRS
+  REAL, INTENT(IN) :: MORPHTH_CRS
+  REAL :: RSSUN1
+  REAL :: RSSHA1
+  REAL :: PSNSUN1
+  REAL :: PSNSHA1
+  REAL :: RSSUN2
+  REAL :: RSSHA2
+  REAL :: PSNSUN2
+  REAL :: PSNSHA2
+  REAL :: DD1
+  REAL :: DD2
+  REAL :: WW1
+  REAL :: WW2
+! ---------
+
   TDC(T)   = MIN( 50., MAX(-50.,(T-TFRZ)) )
 ! ---------------------------------------------------------------------------------------------
 
