@@ -2756,7 +2756,10 @@ ENDIF   ! CROPTYPE == 0
                       FWET   ,TV      ,ALBGRD  ,ALBGRI  ,RHO    , & !in
                       TAU    ,FVEG    ,IST     ,ILOC    ,JLOC   , & !in
                       FABD   ,ALBD    ,FTDD    ,FTID    ,GDIR   , &!)   !out
-                      FREVD  ,FREGD   ,BGAP    ,WGAP)
+                      ! JRL ----------
+                        !FREVD  ,FREGD   ,BGAP    ,WGAP)
+                        FREVD,FREGD,BGAP,WGAP,MORPHR_RAD, MORPHTH_RAD)
+                      ! --------------
 
       IC = 1      ! diffuse
       CALL TWOSTREAM (parameters,IB     ,IC      ,VEGTYP  ,COSZ    ,VAI    , & !in
