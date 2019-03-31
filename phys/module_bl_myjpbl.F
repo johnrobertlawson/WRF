@@ -1331,8 +1331,12 @@
         RDZ=2./(Z(K)-Z(K+2))
         Q1L=SQRT(Q2(K))
         ELQDZ=ELL*Q1L*RDZ
-        AKM(K)=ELQDZ*ESM
-        AKH(K)=ELQDZ*ESH
+        ! JRL ------
+        !AKM(K)=ELQDZ*ESM
+        !AKH(K)=ELQDZ*ESH
+        AKM(K)=ELQDZ*ESM(K)
+        AKH(K)=ELQDZ*ESH(K)
+        ! -----------
 !----------------------------------------------------------------------
       ENDDO
 !----------------------------------------------------------------------
