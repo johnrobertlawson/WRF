@@ -863,8 +863,12 @@
 !***
       INTEGER :: K,LPBLM
 !
-      REAL :: A,ADEN,B,BDEN,AUBR,BUBR,BLMX,EL0,ELOQ2X,GHL,GML           &
-     &       ,QOL2ST,QOL2UN,QDZL,RDZ,SQ,SREL,SZQ,TEM,THM,VKRMZ
+        ! JRL -------------
+        REAL,INTENT(OUT) :: EL0
+        !REAL :: A,ADEN,B,BDEN,AUBR,BUBR,BLMX,EL0,ELOQ2X,GHL,GML           &
+        REAL :: A,ADEN,B,BDEN,AUBR,BUBR,BLMX,ELOQ2X,GHL,GML           &
+        ! -----------------
+        &       ,QOL2ST,QOL2UN,QDZL,RDZ,SQ,SREL,SZQ,TEM,THM,VKRMZ
 !
       REAL,DIMENSION(KTS:KTE) :: Q1
 !
