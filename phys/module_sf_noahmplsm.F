@@ -3782,6 +3782,43 @@ ENDIF   ! CROPTYPE == 0
           CM = CM / UR
        ENDIF
 
+       ! JRL ------------
+        IF (OPT_CRS == 11) then
+          RSSUN1 = RSSUN
+          RSSHA1 = RSSHA
+          PSNSHA1 = PSNSHA
+          PSNSUN1 = PSNSUN
+          CALL STOMATA (parameters,VEGTYP,MPE   ,PARSUN ,FOLN  ,ILOC  , JLOC , &
+                        TV    ,ESTV  ,EAH    ,SFCTMP,SFCPRS, &
+                        O2AIR ,CO2AIR,IGS    ,BTRAN ,RB    , &
+                        RSSUN1 ,PSNSUN1)
+
+          CALL STOMATA (parameters,VEGTYP,MPE   ,PARSHA ,FOLN  ,ILOC  , JLOC , &
+                        TV    ,ESTV  ,EAH    ,SFCTMP,SFCPRS, &
+                        O2AIR ,CO2AIR,IGS    ,BTRAN ,RB    , &
+                        RSSHA1 ,PSNSHA1)
+          RSSUN2 = RSSUN
+          RSSHA2 = RSSHA
+          PSNSHA2 = PSNSHA
+          PSNSUN2 = PSNSUN
+          CALL  CANRES (parameters,PARSUN,TV    ,BTRAN ,EAH    ,SFCPRS, &
+                        RSSUN2 ,PSNSUN2,ILOC  ,JLOC   )
+
+          CALL  CANRES (parameters,PARSHA,TV    ,BTRAN ,EAH    ,SFCPRS, &
+                        RSSHA2 ,PSNSHA2,ILOC  ,JLOC   )
+
+          DD1 = SQRT(1.0+(MORPHR_CRS**2)-(2.0*MORPHR_CRS*COS(MORPHTH_CRS-((2*3.141)/1))))
+          DD2 = SQRT(1.0+(MORPHR_CRS**2)-(2.0*MORPHR_CRS*COS(MORPHTH_CRS-((2*3.141)/2))))
+          WW1 = (1./DD1)/((1./DD1)+(1./DD2))
+          WW2 = (1./DD2)/((1./DD1)+(1./DD2))
+
+          RSSUN = WW1*RSSUN1 + WW2*RSSUN2
+          RSSHA = WW1*RSSHA1 + WW2*RSSHA2
+          PSNSUN = WW1*PSNSUN1 + WW2*PSNSUN2
+          PSNSHA = WW1*PSNSHA1 + WW2*PSNSHA2
+          END IF
+! --------------
+
        RAMC = MAX(1.,1./(CM*UR))
        RAHC = MAX(1.,1./(CH*UR))
        RAWC = RAHC
