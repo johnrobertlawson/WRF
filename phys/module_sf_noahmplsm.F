@@ -442,6 +442,17 @@ contains
   REAL                           , INTENT(IN)    :: SHDMAX  !yearly max vegetation fraction
 !jref:end
 
+! JRL -----
+  REAL,                         INTENT(IN)    :: MORPHR_CRS
+  REAL,                         INTENT(IN)    :: MORPHTH_CRS
+  REAL,                         INTENT(IN)    :: MORPHR_BTR
+  REAL,                         INTENT(IN)    :: MORPHTH_BTR
+  REAL,                         INTENT(IN)    :: MORPHR_RAD
+  REAL,                         INTENT(IN)    :: MORPHTH_RAD
+  REAL,                         INTENT(IN)    :: MORPHR_TBOT
+  REAL,                         INTENT(IN)    :: MORPHTH_TBOT
+! ---------
+
 #ifdef WRF_HYDRO
   REAL                           , INTENT(INOUT)    :: sfcheadrt
 #endif
