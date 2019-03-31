@@ -3277,6 +3277,30 @@ ENDIF   ! CROPTYPE == 0
            GAP     = 1.0-FVEG
            KOPEN   = 1.0-FVEG
          END IF
+     ! JRL -------------------
+          IF (OPT_RAD == 11) THEN
+            DENFVEG = -LOG(MAX(1.0-FVEG,0.01))/(PAI*parameters%RC**2)
+            HD      = parameters%HVT - parameters%HVB
+            BB      = 0.5 * HD
+            THETAP  = ATAN(BB/parameters%RC * TAN(ACOS(MAX(0.01,COSZ))) )
+
+            BGAP    = EXP(-DENFVEG * PAI * parameters%RC**2/COS(THETAP) )
+            FA      = VAI/(1.33 * PAI * parameters%RC**3.0 *(BB/parameters%RC)*DENFVEG)
+            NEWVAI  = HD*FA
+            WGAP    = (1.0-BGAP) * EXP(-0.5*NEWVAI/COSZ)
+            GAP1     = MIN(1.0-FVEG, BGAP+WGAP)
+
+            DD1 = SQRT(1.0+(MORPHR_RAD**2)-(2.0*MORPHR_RAD*COS(MORPHTH_RAD-((2*3.141)/1))))
+            DD2 = SQRT(1.0+(MORPHR_RAD**2)-(2.0*MORPHR_RAD*COS(MORPHTH_RAD-((2*3.141)/2))))
+            DD3 = SQRT(1.0+(MORPHR_RAD**2)-(2.0*MORPHR_RAD*COS(MORPHTH_RAD-((2*3.141)/3))))
+            WW1 = (1./DD1)/((1./DD1)+(1./DD2)+(1./DD3))
+            WW2 = (1./DD2)/((1./DD1)+(1./DD2)+(1./DD3))
+            WW3 = (1./DD3)/((1./DD1)+(1./DD2)+(1./DD3))
+            GAP = (WW1*GAP1) + (WW2*0.0) + (WW3*(1.0-FVEG))
+            KOPEN = (WW1*0.05) + (WW2*0.0) + (WW3*(1.0-FVEG))
+          END IF
+     ! -----------------------
+
      end if
 
 ! calculate two-stream parameters OMEGA, BETAD, BETAI, AVMU, GDIR, EXT.
