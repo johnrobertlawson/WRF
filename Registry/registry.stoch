@@ -1,11 +1,11 @@
-# Stochastic forcing option, for ARW only
+re# Stochastic forcing option, for ARW only
 
 # 3D arrays
 state    real   VERTSTRUCC    ikj  dyn_em 1 -   rd         "VERTSTRUCC"     "vertical structure for stoch. forcing " ""
 state    real   VERTSTRUCS    ikj  dyn_em 1 -   rd         "VERTSTRUCS"     "vertical structure for stoch. forcing " ""
- 
 
-# full or possibly thin (i.e., length of 1) 3D arrays depending of dimension i{stoclev}j 
+
+# full or possibly thin (i.e., length of 1) 3D arrays depending of dimension i{stoclev}j
 state    real   field_sf        i{stoclev}j  dyn_em 1 -   rhdf=(p2c) "field_sf      " "field for surface perturbations " ""
 state    real   field_pbl       i{stoclev}j  dyn_em 1 -   rhdf=(p2c) "field_pbl     " "field for surface perturbations " ""
 state    real   field_conv      i{stoclev}j  dyn_em 1 -   rhdf=(p2c) "field_conv     " "field for surface perturbations " ""
@@ -20,7 +20,7 @@ state    real   rstoch          i{stoclev}j  dyn_em 1 -   rhdf=(p2c) "rstoch"   
 
 state    real   RAND_REAL       i{stoclev}j  dyn_em 1 XYZ -          "RAND_REAL"       "array for FFTs" ""
 state    real   RAND_IMAG       i{stoclev}j  dyn_em 1 XYZ -          "RAND_IMAG"       "array for FFTs" ""
- 
+
 # 2d arrays
 state    real  SPSTREAMFORCC  ij   misc   1 XY  r          "SPSTREAMFORCC"  "real  spect. coeff. of stoch. streamfunction perturb." ""
 state    real  SPSTREAMFORCS  ij   misc   1 XY  r          "SPSTREAMFORCS"  "imag. spect. coeff. of stoch. streamfunction perturb." ""
@@ -73,7 +73,7 @@ state    real   RAND_IMAG_yyy   i{stoclev}jy dyn_em 1 XYZ
 xpose XPOSE_RAND_REAL  dyn_em RAND_REAL,RAND_REAL_xxx,RAND_REAL_yyy
 xpose XPOSE_RAND_IMAG  dyn_em RAND_IMAG,RAND_IMAG_xxx,RAND_IMAG_yyy
 
-# Variables 
+# Variables
 state real      ALPH_T           -      misc        1         -     -         "ALPH_TAU "   "autoregressive coeff. for theta  perturb."  ""
 state real      ALPH_PSI         -      misc        1         -     -         "ALPH_PSI "   "autoregressive coeff. for psi    perturb."  ""
 state real      ALPH_SPPT        -      misc        1         -     -         "ALPH_SPPT"   "autoregressive coeff. for tendf  perturb."  ""
@@ -134,7 +134,7 @@ rconfig   real        timescale_rand_pert     namelist,stoch      max_domains   
 rconfig   integer     rand_pert_vertstruc     namelist,stoch      1                      0 -  "vertical structure for random perturb: 0=constant, 1=random phase"
 rconfig   integer     iseed_rand_pert         namelist,stoch      1                    17  - "ISEED_RAND_PERT"       "RANDOM SEED FOR RAND_PERT "  ""
 
-# Namelist parameters for stochastic perturbed parameters 
+# Namelist parameters for stochastic perturbed parameters
 
 rconfig   integer     spp                    namelist,stoch       max_domains           0  - "generate array with random perturbations: 0=off, 1=on"
 rconfig   logical     hrrr_cycling           namelist,stoch       1               .false.  - "switch to control restart in quasi-cycled hrrr-forecasts"
@@ -149,7 +149,7 @@ rconfig   real        timescale_spp_conv     namelist,stoch      max_domains    
 rconfig   integer     vertstruc_spp_conv     namelist,stoch      1                      0 -  "vertical structure for random perturb: 0=constant, 1=random phase"
 rconfig   integer     iseed_spp_conv         namelist,stoch      1                   171  - "ISEED_RAND_PERT"       "RANDOM SEED FOR RAND_PERT "  ""
 
-# Namelist parameters for stochastic perturbed parameters (SPP) for pbl 
+# Namelist parameters for stochastic perturbed parameters (SPP) for pbl
 
 rconfig   integer     spp_pbl              namelist,stoch       max_domains           0  - "generate array with random perturbations: 0=off, 1=on"
 rconfig   real        gridpt_stddev_spp_pbl namelist,stoch      max_domains         0.15 - "gridpoint standard deviation of random perturbations"
@@ -160,7 +160,7 @@ rconfig   integer     vertstruc_spp_pbl     namelist,stoch      1               
 rconfig   integer     iseed_spp_pbl         namelist,stoch      1                   217  - "ISEED_RAND_PERT"       "RANDOM SEED FOR RAND_PERT "  ""
 
 
-# Namelist parameters for stochastic perturbed parameters (SPP) for lsm 
+# Namelist parameters for stochastic perturbed parameters (SPP) for lsm
 
 rconfig   integer     spp_lsm               namelist,stoch      max_domains           0  - "generate array with random perturbations: 0=off, 1=on"
 rconfig   real        gridpt_stddev_spp_lsm namelist,stoch      max_domains         0.3  - "gridpoint standard deviation of random perturbations"
@@ -178,9 +178,23 @@ rconfig   integer     spp_on                  derived    1        0        - "sk
 rconfig   integer     rand_perturb_on         derived    1        0        - "rand_perturb_on " "random perturb. array is declared&filled for all domains"  ""
 rconfig   integer     num_stoch_levels        derived    1        1        - "num_stoch_levels" "number of vertical levels of random fields"  ""
 
-# Package declarations
+# JRL ###############
+rconfig   real        aml                     namelist,stoch      max_domains        150.0 - "Asymptotic m    ixing length in PBL scheme" "" ""
+rconfig   real        ashc                    namelist,stoch      max_domains          2.0 - "Scaling coef    ficient constant." "" ""
+state     real        qtend_og                ikj        dyn_em   1   -   rh   "qtend_og"    "Unperturbed moisture tendency"
+state     real        qtend_pert              ikj        dyn_em   1   -   rh   "qtend_pert"  "Perturbation to moisture tendency"
+state     real        ttend_og                ikj        dyn_em   1   -   rh    "ttend_og"    "Unperturbed temp tendency"
+state     real        ttend_pert              ikj        dyn_em   1   -   rh    "ttend_pert"  "Perturbation to temp tendency"
+state     real        wtend_og                ikj        dyn_em   1   -   rh    "wtend_og"    "Unperturbed vertical motion tendency"
+state     real        wtend_pert              ikj        dyn_em   1   -   rh    "wtend_pert"   "Perturbation to vertical motion tendency"
+#####################
 
-package  sppt_perturb    sppt_on==1           -   state:rstoch,SPPTFORCS,SPPTFORCC,SPPT_AMP,VERTSTRUCC,VERTSTRUCS,VERTAMPT,RAND_REAL,RAND_IMAG,RAND_REAL_xxx,RAND_REAL_yyy,RAND_IMAG_xxx,RAND_IMAG_yyy
+# Package declarations
+### JRL ###
+#package  sppt_perturb    sppt_on==1          -   state:rstoch,SPPTFORCS,SPPTFORCC,SPPT_AMP,VERTSTRUCC,VERTSTRUCS,VERTAMPT,RAND_REAL,RAND_IMAG,RAND_REAL_xxx,RAND_REAL_yyy,RAND_IMAG_xxx,RAND_IMAG_yyy,
+package  sppt_perturb    sppt_on==1          -   state:rstoch,SPPTFORCS,SPPTFORCC,SPPT_AMP,VERTSTRUCC,VERTSTRUCS,VERTAMPT,RAND_REAL,RAND_IMAG,RAND_REAL_xxx,RAND_REAL_yyy,RAND_IMAG_xxx,RAND_IMAG_yyy,qtend_og,qtend_pert,ttend_og,ttend_pert,wtend_og,wtend_pert
+#package  sppt_perturb    sppt_on==1           -   state:rstoch,SPPTFORCS,SPPTFORCC,SPPT_AMP,VERTSTRUCC,VERTSTRUCS,VERTAMPT,RAND_REAL,RAND_IMAG,RAND_REAL_xxx,RAND_REAL_yyy,RAND_IMAG_xxx,RAND_IMAG_yyy
+#######
 
 package  skebs_perturb   skebs_on==1          -   state:ru_tendf_stoch,rv_tendf_stoch,rt_tendf_stoch,SPSTREAMFORCC,SPSTREAMFORCS,SPTFORCC,SPTFORCS,SPSTREAM_AMP,SPT_AMP,VERTSTRUCC,VERTSTRUCS,VERTAMPT,VERTAMPUV,RAND_REAL,RAND_IMAG,RAND_REAL_xxx,RAND_REAL_yyy,RAND_IMAG_xxx,RAND_IMAG_yyy
 
