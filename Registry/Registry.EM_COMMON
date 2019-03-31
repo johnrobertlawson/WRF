@@ -2146,6 +2146,11 @@ rconfig   real     nssl_rho_qh            namelist,physics      max_domains  500
 rconfig   real     nssl_rho_qhl           namelist,physics      max_domains  900.     rh       "Hail particle density"  ""      ""
 rconfig   real     nssl_rho_qs            namelist,physics      max_domains  100.     rh       "Snow particle density"  ""      ""
 
+# JRL ################
+rconfig   real     nssl_alphar            namelist,physics      max_domains  0.0      rh       "Rain shape parameter"
+rconfig   real     nssl_ehw0              namelist,physics      max_domains  0.5      rh       "Max graupel droplet collection eff."
+rconfig   real     nssl_ehlw0             namelist,physics      max_domains  0.75     rh       "Max hail droplet collection eff."
+# ####################
 
 # Lightning Qv Nudging
 rconfig   integer  nudge_lightning        namelist,physics      max_domains   0       rh       "flag for lightning Qv nudging"  ""      ""
