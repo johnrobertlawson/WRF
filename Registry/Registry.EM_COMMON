@@ -2702,7 +2702,10 @@ package   p3_2category    mp_physics==52               -             moist:qv,qc
 package   morr_tm_aero    mp_physics==40               -             moist:qv,qc,qr,qi,qs,qg;scalar:qnc,qni,qns,qnr,qng;state:rqrcuten,rqscuten,rqicuten,EFCG,EFIG,EFSG,WACT,CCN1_GS,CCN2_GS,CCN3_GS,CCN4_GS,CCN5_GS,CCN6_GS,CCN7_GS,re_cloud,re_ice,re_snow,mskf_refl_10cm
 package   etampnew        mp_physics==95               -             moist:qv,qc,qr,qs;scalar:qt;state:f_ice_phy,f_rain_phy,f_rimef_phy
 
-package   radar_refl      compute_radar_ref==1         -             state:refl_10cm,refd_max
+# JRL #### for DA
+#package   radar_refl      compute_radar_ref==1         -             state:refl_10cm,refd_max
+package   radar_refl      compute_radar_ref==1         -             state:refl_10cm,refd_max,vt_dbz_wt
+################
 endif
 
 package   nodfimoist        mp_physics_dfi==-1       -             -
