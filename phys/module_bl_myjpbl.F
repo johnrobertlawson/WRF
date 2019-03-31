@@ -254,7 +254,7 @@
       REAL,DIMENSION(KTS:KTE-1) :: ESHK, ESMK
       REAL,DIMENSION(ITS:ITE,KTS:KTE-1,JTS:JTE) :: ESH,ESM
       ! -----------------
-      
+
 !***  Begin debugging
       REAL :: ZSL_DIAG
       INTEGER :: IMD,JMD,PRINT_DIAG
@@ -263,7 +263,18 @@
 !----------------------------------------------------------------------
 !**********************************************************************
 !----------------------------------------------------------------------
-!
+
+! JRL -------------
+     ! Are these maybe done for first time step?
+     !TSQ(ITS:ITE,KTS:KTE,JTS:JTE) = 0.0
+     !QSQ(ITS:ITE,KTS:KTE,JTS:JTE) = 0.0
+     !L_INF(ITS:ITE,JTS:JTE) = 0.0
+     ESH(ITS:ITE,KTS:KTE-1,JTS:JTE) = 0.0
+     ESM(ITS:ITE,KTS:KTE-1,JTS:JTE) = 0.0 ! NOT USED RIGHT NOW?
+     ESHK(KTS:KTE-1) = 0.0
+     ESMK(KTS:KTE-1) = 0.0
+! -----------------
+
 !***  Begin debugging
       IMD=(IMS+IME)/2
       JMD=(JMS+JME)/2
