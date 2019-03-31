@@ -2152,7 +2152,7 @@ ENDIF   ! CROPTYPE == 0
                                     !STC     )                                       !inout
                     TC, MORPHR_TBOT,MORPHTH_TBOT )
                     ! ---------
-                    
+
 ! adjusting snow surface temperature
      IF(OPT_STC == 2) THEN
       IF (SNOWH > 0.05 .AND. TG > TFRZ) THEN
@@ -2470,7 +2470,10 @@ ENDIF   ! CROPTYPE == 0
                         ALBOLD  ,TAUSS   ,                            & !inout
                         FSUN    ,LAISUN  ,LAISHA  ,PARSUN  ,PARSHA  , & !out
                         SAV     ,SAG     ,FSR     ,FSA     ,FSRV    , &
-                        FSRG    ,BGAP    ,WGAP)            !out
+                        ! JRL ----------------
+                            !FSRG    ,BGAP    ,WGAP)            !out
+                            FSRG,BGAP,WGAP,MORPHR_RAD,MORPHTH_RAD)
+                        ! --------------------
 ! --------------------------------------------------------------------------------------------------
   IMPLICIT NONE
 ! --------------------------------------------------------------------------------------------------
