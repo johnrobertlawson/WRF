@@ -545,7 +545,10 @@ contains
    real,     dimension( its:ite, kts:kte ), intent(inout)   ::       xkzhl ! JRL
 
    real,     dimension( its:ite, kts:kte )   ::                                &
-                                                                  xkzml,xkzhl, &
+   ! JRL ------
+                                                                 !xkzml,xkzhl, &
+                                                                 xkzml,       &
+   ! ----------
                                                                zfacent,entfac
    real,     dimension( its:ite, kts:kte )   ::                                &
                                                                            mf, &
