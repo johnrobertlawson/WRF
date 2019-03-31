@@ -5166,7 +5166,10 @@ ENDIF   ! CROPTYPE == 0
                       TBOT    ,ZSNSO   ,SSOIL   ,DF      ,HCPCT   , & !in
                       SAG     ,DT      ,SNOWH   ,DZSNSO  , & !in
                       TG      ,ILOC    ,JLOC    ,                   & !in
-                      STC     )                                       !inout
+                      ! JRL ------
+                                            !STC     )                                       !inout
+                                            STC,MORPHR_TBOT, MORPHTH_TBOT     )
+                      ! ----------
 ! --------------------------------------------------------------------------------------------------
 ! Compute snow (up to 3L) and soil (4L) temperature. Note that snow temperatures
 ! during melting season may exceed melting point (TFRZ) but later in PHASECHANGE
