@@ -893,6 +893,10 @@ CONTAINS
 #ifdef WRF_HYDRO
             , sfcheadrt(i,j)                               &
 #endif
+        ! JRL ------
+        ,MORPHR_CRS,MORPHTH_CRS,MORPHR_BTR,MORPHTH_BTR &
+        ,MORPHR_RAD,MORPHTH_RAD,MORPHR_TBOT,MORPHTH_TBOT &
+        ! ----------
             )            ! OUT :
 
             QFX(I,J) = ECAN + ESOIL + ETRAN
