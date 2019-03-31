@@ -789,6 +789,25 @@
             RVBLTEN(I,K,J)=DVDT
           ENDDO
 !
+            ! JRL --------
+            ! Might need to flip the K for ESH/ESM?
+            DO K=KTS+1,KTE-1
+                KFLIP = KTE+1-K
+                DTHDZ = (TH(I,KFLIP-1,J)-TH(I,KFLIP+1,J))/(2.0*DZ(I,KFLIP,J))
+                !DTHDZ = (TH(I,K,J)-TH(I,K+1,J))/(-1.0*DZ(I,K,J))
+                TSQ(I,K,J) = ABS(((B2*EL_MYJ(I,K,J))/(TKE_MYJ(I,K,J)))*        &
+                      (EL_MYJ(I,K,J)*TKE_MYJ(I,K,J)*ESH(I,K,J)*(DTHDZ**2)))
+                !DQDZ = (QV(I,KFLIP-1,J)-QV(I,KFLIP+1,J))/(2.0*DZ(I,KFLIP,J))
+                DQDZ = (QV(I,K-1,J)-QV(I,K+1,J))/(2.0*DZ(I,K,J))
+                QSQ(I,K,J) = ABS(((B2*EL_MYJ(I,K,J))/(TKE_MYJ(I,K,J)))*         &
+                      (EL_MYJ(I,K,J)*TKE_MYJ(I,K,J)*ESH(I,K,J)*(DQDZ**2)))
+            ENDDO
+            TSQ(I,KTE,J) = TSQ(I,KTE-1,J)
+            TSQ(I,KTE,J) = TSQ(I,KTE-1,J)
+            QSQ(I,KTS,J) = QSQ(I,KTS+1,J)
+            QSQ(I,KTS,J) = QSQ(I,KTS+1,J)
+            ! -------------
+
         ENDDO
 !----------------------------------------------------------------------
 !
