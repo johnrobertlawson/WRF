@@ -453,8 +453,11 @@
           CALL DIFCOF(LMH,LMXL,GM,GH,EL,TK,Q2K,ZHK,AKMK,AKHK      &
      &               ,IDS,IDE,JDS,JDE,KDS,KDE                          &
      &               ,IMS,IME,JMS,JME,KMS,KME                          &
-     &               ,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG)   ! debug
-!
+     ! JRL -----
+    !&               ,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG)   ! debug
+    &               ,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG          &
+    &               ,ESHK,ESMK                                   )
+     ! -----------!
 !***  COUNTING DOWNWARD FROM THE TOP, THE EXCHANGE COEFFICIENTS AKH
 !***  ARE DEFINED ON THE BOTTOMS OF THE LAYERS KTS TO KTE-1.
 !***  COUNTING UPWARD FROM THE BOTTOM, THOSE SAME COEFFICIENTS AS
