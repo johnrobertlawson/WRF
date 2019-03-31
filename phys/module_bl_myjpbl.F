@@ -424,8 +424,11 @@
      &               ,PBLH(I,J),LPBL(I,J),LMXL,CT(I,J),MIXHT(I,J)      &    !PLee (3/07)
      &               ,IDS,IDE,JDS,JDE,KDS,KDE                          &
      &               ,IMS,IME,JMS,JME,KMS,KME                          &
-     &               ,ITS,ITE,JTS,JTE,KTS,KTE)
-!
+     ! JRL -----------
+     !&               ,ITS,ITE,JTS,JTE,KTS,KTE)
+     &               ,ITS,ITE,JTS,JTE,KTS,KTE                          &
+     &               ,L_INF(I,J)                                       )
+     ! ---------------!
 !----------------------------------------------------------------------
 !***
 !***  SOLVE FOR THE PRODUCTION/DISSIPATION OF
