@@ -1504,7 +1504,10 @@ contains
 !
 !---- calculate sgs tke which is consistent with shinhongpbl algorithm
 !
-   if (shinhong_tke_diag.eq.1) then
+! JRL -------- Force TKE to be computed
+   !if (shinhong_tke_diag.eq.1) then
+   if (1 > 0) then
+! ------------
 !
    tke_calculation: do i = its,ite
      do k = kts+1,kte
