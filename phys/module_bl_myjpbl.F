@@ -1263,8 +1263,12 @@
       INTEGER :: K,KINV
 !
       REAL :: ADEN,AKMIN,BDEN,BESH,BESM,CDEN,D2T,ELL,ELOQ2,ELOQ4,ELQDZ &
-     &       ,ESH,ESM,GHL,GML,Q1L,RDEN,RDZ
-!
+      ! JRL -------
+     !&       ,ESH,ESM,GHL,GML,Q1L,RDEN,RDZ
+     &       ,GHL,GML,Q1L,RDEN,RDZ
+      REAL,DIMENSION(KTS:KTE-1),INTENT(OUT) :: ESH,ESM
+      ! -------------
+      !
 !*** Begin debugging
       INTEGER,INTENT(IN) :: PRINT_DIAG
 !     REAL :: D2Tmin
