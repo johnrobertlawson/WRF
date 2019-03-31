@@ -1895,7 +1895,10 @@ ENDIF   ! CROPTYPE == 0
                    ALBOLD  ,TAUSS   ,                            & !inout
                    FSUN    ,LAISUN  ,LAISHA  ,PARSUN  ,PARSHA  , & !out
                    SAV     ,SAG     ,FSR     ,FSA     ,FSRV    , &
-                   FSRG    ,BGAP    ,WGAP    )            !out
+                   ! JRL --------------
+                          !FSRG    ,BGAP    ,WGAP    )            !out
+                          FSRG,BGAP,WGAP,MORPHR_RAD,MORPHTH_RAD    )
+                   ! ------------------
 
 ! vegetation and ground emissivity
 
