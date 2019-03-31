@@ -541,6 +541,9 @@ contains
                                                                            za
    real,     dimension( its:ite, kts:kte )   ::                                &
                                                                       wscalek
+
+   real,     dimension( its:ite, kts:kte ), intent(inout)   ::       xkzhl ! JRL
+
    real,     dimension( its:ite, kts:kte )   ::                                &
                                                                   xkzml,xkzhl, &
                                                                zfacent,entfac
