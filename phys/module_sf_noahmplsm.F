@@ -3450,8 +3450,11 @@ ENDIF   ! CROPTYPE == 0
                        T2MV    ,PSNSUN  ,PSNSHA  ,                   & !out
                        QC      ,QSFC    ,PSFC    ,                   & !in
                        Q2V     ,CAH2    ,CHLEAF  ,CHUC,              & !inout
-                       SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D)      ! Gecros
-
+                       ! JRL ---------
+                       !SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D)      ! Gecros
+                       SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D, &
+                       MORPHR_CRS, MORPHTH_CRS   )
+                       ! --------------
 ! --------------------------------------------------------------------------------------------------
 ! use newton-raphson iteration to solve for vegetation (tv) and
 ! ground (tg) temperatures that balance the surface energy budgets
