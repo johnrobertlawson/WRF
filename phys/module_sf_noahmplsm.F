@@ -5216,6 +5216,15 @@ ENDIF   ! CROPTYPE == 0
     REAL                            :: SSOIL2  !ground heat flux (w/m2) (for energy check)
     REAL                            :: EFLXB2  !heat flux from the bottom (w/m2) (for energy check)
     character(len=256)              :: message
+
+    ! JRL -------------
+    REAL,                   INTENT(IN)  :: MORPHR_TBOT
+    REAL,                   INTENT(IN)  :: MORPHTH_TBOT
+    REAL                                :: DD1
+    REAL                                :: DD2
+    REAL                                :: WW2
+    ! ----------------
+
 ! ----------------------------------------------------------------------
 ! compute solar penetration through water, needs more work
 
