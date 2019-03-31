@@ -5250,7 +5250,7 @@ ENDIF   ! CROPTYPE == 0
                                     !EFLXB     )
                                     EFLXB,MORPHR_TBOT, MORPHTH_TBOT     )
                   ! ------------
-                  
+
       CALL HSTEP (parameters,NSNOW     ,NSOIL     ,ISNOW     ,DT        , &
                   AI        ,BI        ,CI        ,RHSTS     , &
                   STC       )
@@ -5263,6 +5263,14 @@ ENDIF   ! CROPTYPE == 0
     ELSE IF(OPT_TBOT == 2) THEN
        EFLXB2  = DF(NSOIL)*(TBOT-STC(NSOIL)) / &
             (0.5*(ZSNSO(NSOIL-1)+ZSNSO(NSOIL)) - ZBOTSNO)
+    ! JRL --------
+    ELSE IF (OPT_TBOT == 11) THEN
+      DD1 = SQRT(1.0+(MORPHR_TBOT**2)-(2.0*MORPHR_TBOT*COS(MORPHTH_TBOT-((2*3.141)/1))))
+      DD2 = SQRT(1.0+(MORPHR_TBOT**2)-(2.0*MORPHR_TBOT*COS(MORPHTH_TBOT-((2*3.141)/2))))
+      WW2 = (1./DD2)/((1./DD1)+(1./DD2))
+      EFLXB2 = (WW2*(DF(NSOIL)*(TBOT-STC(NSOIL)) / &
+          (0.5*(ZSNSO(NSOIL-1)+ZSNSO(NSOIL)) - ZBOTSNO)))
+! -----------
     END IF
 
     ! Skip the energy balance check for now, until we can make it work
