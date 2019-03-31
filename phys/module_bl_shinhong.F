@@ -254,7 +254,10 @@ contains
              ,u10=u10(ims,j),v10=v10(ims,j)                                    &
              ,ctopo=ctopo(ims,j),ctopo2=ctopo2(ims,j)                          &
              ,shinhong_tke_diag=shinhong_tke_diag                              &
-             ,tke=tke_pbl(ims,kms,j),el_pbl=el_pbl(ims,kms,j)                  &
+             ! JRL ----
+             !,tke=tke_pbl(ims,kms,j),el_pbl=el_pbl(ims,kms,j)                 &
+             ,tke=tke_pbl(:,:,j),el_pbl=el_pbl(:,:,j)                          &
+             ! --------
              ,corf=corf(ims,j)                                                 &
              ,dx=dx,dy=dy                                                      &
              ,ids=ids,ide=ide, jds=jds,jde=jde, kds=kds,kde=kde                &
