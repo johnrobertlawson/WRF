@@ -2045,7 +2045,7 @@ ENDIF   ! CROPTYPE == 0
                     Q2V     ,CHV2, CHLEAF, CHUC, &
                     ! JRL
                     !SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D)      ! Gecros
-                    SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D,
+                    SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D, &
                     MORPHR_CRS, MORPHTH_CRS)
                     ! ----------------
 
