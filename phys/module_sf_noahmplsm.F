@@ -762,7 +762,14 @@ contains
                  Q1     ,Q2V    ,Q2B    ,Q2E    ,CHV   ,CHB     , & !out
                  EMISSI ,PAH    ,                                 &
 		 SHG,SHC,SHB,EVG,EVB,GHV,GHB,IRG,IRC,IRB,TR,EVC,CHLEAF,CHUC,CHV2,CHB2,&
-                 JULIAN, SWDOWN, PRCP, FB, GECROS1D )
+         ! JRL -------
+                 !JULIAN, SWDOWN, PRCP, FB, GECROS1D )
+                 JULIAN, SWDOWN, PRCP, FB, GECROS1D,
+                 MORPHR_CRS, MORPHTH_CRS, MORPHR_BTR, MORPHTH_BTR, &
+                 MORPHR_RAD,MORPHTH_RAD,MORPHR_TBOT,MORPHTH_TBOT
+                  )
+        ! ---------------
+
 !jref:end
 
     SICE(:) = MAX(0.0, SMC(:) - SH2O(:))
