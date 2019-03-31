@@ -3234,6 +3234,18 @@ ENDIF   ! CROPTYPE == 0
    REAL :: KOPEN    !gap fraction for diffue light (-)
    REAL :: GAP      !total gap fraction for beam ( <=1-shafac )
 
+   ! JRL -----
+      REAL,    INTENT(IN)  :: MORPHR_RAD
+      REAL,    INTENT(IN)  :: MORPHTH_RAD
+      REAL                 :: DD1
+      REAL                 :: DD2
+      REAL                 :: DD3
+      REAL                 :: WW1
+      REAL                 :: WW2
+      REAL                 :: WW3
+      REAL                 :: GAP1
+   ! --------
+
 ! -----------------------------------------------------------------
 ! compute within and between gaps
      VAI_SPREAD = VAI
