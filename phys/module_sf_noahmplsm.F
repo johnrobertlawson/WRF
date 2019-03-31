@@ -2043,7 +2043,13 @@ ENDIF   ! CROPTYPE == 0
 !jref:start
                     QC      ,QSFC    ,PSFC    , & !in
                     Q2V     ,CHV2, CHLEAF, CHUC, &
-                    SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D)      ! Gecros
+                    ! JRL
+                    !SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D)      ! Gecros
+                    SH2O,JULIAN, SWDOWN, PRCP, FB, FSR, GECROS1D,
+                    MORPHR_CRS, MORPHTH_CRS)
+                    ! ----------------
+
+                    ! ----------
 !jref:end
     END IF
 
