@@ -2665,6 +2665,10 @@ ENDIF   ! CROPTYPE == 0
   REAL, INTENT(OUT) :: BGAP
   REAL, INTENT(OUT) :: WGAP
 !jref:end
+! JRL -----
+  REAL,                  INTENT(IN)  :: MORPHR_RAD
+  REAL,                  INTENT(IN)  :: MORPHTH_RAD
+! ---------
 
 ! ------------------------------------------------------------------------
 ! ------------------------ local variables -------------------------------
