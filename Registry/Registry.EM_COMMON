@@ -475,7 +475,12 @@ state    real    vc_j                 -       misc     -     -    r
 # moist_tend even if there are not any moist scalars (so the essentially
 # dry code will will still link properly)
 #
+### JRL ###
+#state   real    -              ikjftb   moist       1         -     -    -
+# turned off for now?
 state   real    -              ikjftb   moist       1         -     -    -
+#state   real    -              ikjftb   moist       1         -     hr    "MOIST_JRL"
+###########
 state   real    qv             ikjftb   moist       1         -     \
   i0rh01usdf=(bdy_interp:dt) "QVAPOR"           "Water vapor mixing ratio"      "kg kg-1"
 state   real    qc             ikjftb   moist       1         -     \
