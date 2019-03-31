@@ -2339,6 +2339,16 @@ rconfig   integer calc_clean_atm_diag     derived               1              0
 
 
 # For Noah-MP
+# JRL #####################
+rconfig   real morphr_crs     namelist,noah_mp      1           0.0       h    "morphr_crs"     "Radius for stochastic morphing, CRS"   ""
+rconfig   real morphr_rad     namelist,noah_mp      1           0.0       h    "morphr_rad"     "Radius for stochastic morphing, RAD"   ""
+rconfig   real morphr_tbot    namelist,noah_mp      1           0.0       h    "morphr_tbot"     "Radius for stochastic morphing, TBOT"   ""
+rconfig   real morphr_btr     namelist,noah_mp      1           0.0       h    "morphr_btr"     "Radius for stochastic morphing, BTR"   ""
+rconfig   real morphth_crs    namelist,noah_mp      1           3.141     h    "morphth_crs"     "Angle (radians) for stochastic morphing, CRS"   ""
+rconfig   real morphth_rad    namelist,noah_mp      1           3.141     h    "morphth_rad"     "Angle (radians) for stochastic morphing, RAD"   ""
+rconfig   real morphth_tbot    namelist,noah_mp      1           3.141     h    "morphth_tbot"     "Angle (radians) for stochastic morphing, TBOT"   ""
+rconfig   real morphth_btr    namelist,noah_mp      1           3.141     h    "morphth_btr"     "Angle (radians) for stochastic morphing, BTR"   ""
+# #########################
 rconfig   integer dveg        namelist,noah_mp      1           4         h    "dveg"     "dynamic vegetation (1 -> off ; 2 -> on)"   ""
 rconfig   integer opt_crs     namelist,noah_mp      1           1         h    "opt_crs"  "canopy stomatal resistance (1-> Ball-Berry; 2->Jarvis)"   ""
 rconfig   integer opt_btr     namelist,noah_mp      1           1         h    "opt_btr"  "soil moisture factor for stomatal resistance (1-> Noah; 2-> CLM; 3-> SSiB)"   ""
