@@ -2766,7 +2766,10 @@ ENDIF   ! CROPTYPE == 0
                       FWET   ,TV      ,ALBGRD  ,ALBGRI  ,RHO    , & !in
                       TAU    ,FVEG    ,IST     ,ILOC    ,JLOC   , & !in
                       FABI   ,ALBI    ,FTDI    ,FTII    ,GDIR   , & !)   !out
-                      FREVI  ,FREGI   ,BGAP    ,WGAP)
+                      ! JRL ----------
+                    !FREVI  ,FREGI   ,BGAP    ,WGAP)
+                    FREVI,FREGI,BGAP,WGAP,MORPHR_RAD, MORPHTH_RAD)
+                      ! --------------
 
   END DO
 
