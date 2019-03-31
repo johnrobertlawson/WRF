@@ -790,7 +790,7 @@
           ENDDO
 !
             ! JRL --------
-            ! Might need to flip the K for ESH/ESM?
+            ! Might need to flip the K for  ESH/ESM?
             DO K=KTS+1,KTE-1
                 KFLIP = KTE+1-K
                 DTHDZ = (TH(I,KFLIP-1,J)-TH(I,KFLIP+1,J))/(2.0*DZ(I,KFLIP,J))
@@ -831,8 +831,11 @@
      &(LMH,U,V,T,THE,Q,CWM,Q2,Z,GM,GH,EL,PBLH,LPBL,LMXL,CT,MIXHT       &    !PLee(3/07)
      &,IDS,IDE,JDS,JDE,KDS,KDE                                         &
      &,IMS,IME,JMS,JME,KMS,KME                                         &
-     &,ITS,ITE,JTS,JTE,KTS,KTE)
-!----------------------------------------------------------------------
+     ! JRL -------
+        !&,ITS,ITE,JTS,JTE,KTS,KTE)
+        & ,ITS,ITE,JTS,JTE,KTS,KTE,EL0)
+     ! -----------
+     !----------------------------------------------------------------------
 !
       IMPLICIT NONE
 !
