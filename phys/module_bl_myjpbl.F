@@ -468,6 +468,10 @@
             KFLIP=KTE-K
             AKH(I,K,J)=AKHK(K)
             AKM(I,K,J)=AKMK(K)
+            ! JRL --------
+            ESH(I,K,J)=ESHK(K)
+            ESM(I,K,J)=ESMK(K)
+            ! ------------
             DELTAZ=0.5*(ZHK(KFLIP)-ZHK(KFLIP+2))
             EXCH_H(I,K,J)=AKHK(KFLIP)*DELTAZ
           ENDDO
