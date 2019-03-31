@@ -1276,6 +1276,7 @@ CONTAINS
               ,IMS=ims,IME=ime,JMS=jms,JME=jme,KMS=kms,KME=kme      &
               ,ITS=its,ITE=ite,JTS=jts,JTE=jte,KTS=kts,KTE=kte      &
               ,DX=dx,DY=dy                                          &
+              ,TSQ=tsq,QSQ=qsq                                 & ! JRL
                                                                     )
            ELSE
                WRITE ( message , FMT = '(A,7(L1,1X))' )             &
