@@ -5388,6 +5388,18 @@ ENDIF   ! CROPTYPE == 0
                DTSDZ(K)  = (STC(K) - TBOT) / ( 0.5*(ZSNSO(K-1)+ZSNSO(K)) - ZBOT)
                BOTFLX    = -DF(K) * DTSDZ(K)
            END IF
+           ! JRL --------
+           IF (OPT_TBOT == 11) THEN
+               DTSDZ(K)  = (STC(K) - TBOT) / ( 0.5*(ZSNSO(K-1)+ZSNSO(K)) - ZBOT)
+
+               DD1 = SQRT(1.0+(MORPHR_TBOT**2)-(2.0*MORPHR_TBOT* &
+                             COS(MORPHTH_TBOT-((2*3.141)/1))))
+               DD2 = SQRT(1.0+(MORPHR_TBOT**2)-(2.0*MORPHR_TBOT* &
+                             COS(MORPHTH_TBOT-((2*3.141)/2))))
+               WW2 = (1./DD2)/((1./DD1)+(1./DD2))
+               BOTFLX    = WW2*(-DF(K) * DTSDZ(K))
+           ENDIF
+! ------------
            EFLUX(K)  = (-BOTFLX - DF(K-1)*DTSDZ(K-1) ) - PHI(K)
         END IF
     END DO
