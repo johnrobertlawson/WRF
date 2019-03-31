@@ -202,6 +202,16 @@ contains
                                                                         dtsfc, &
                                                                         dqsfc
 !
+! JRL ---------
+    real :: dthdz, dqdz = 0.0
+    real,dimension(ims:ime,kms:kme,jms:jme),intent(inout) ::   tsq,qsq
+    real,dimension( ims:ime, kms:kme, jms:jme)   ::       xkzhl_3d
+    !real,     dimension( its:ite, kts:kte )   ::       xkzhl = 0.0
+   ! Maybe do this initialisation at first time step?
+   !tsq(its:ite,kts:kte,jts:jte) = 0.0
+   !qsq(its:ite,kts:kte,jts:jte) = 0.0
+   xkzhl_3d = 0.0
+! -------------
    qv2d(its:ite,:) = 0.0
 !
    do j = jts,jte
