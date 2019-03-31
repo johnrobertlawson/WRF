@@ -1237,8 +1237,10 @@
      &(LMH,LMXL,GM,GH,EL,T,Q2,Z,AKM,AKH                                &
      &,IDS,IDE,JDS,JDE,KDS,KDE                                         &
      &,IMS,IME,JMS,JME,KMS,KME                                         &
-     &,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG)   ! debug
-!----------------------------------------------------------------------
+     ! JRL ------
+        !&,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG)   ! debug
+        & ,ITS,ITE,JTS,JTE,KTS,KTE,PRINT_DIAG,ESH,ESM)
+     ! -----------!----------------------------------------------------------------------
 !
       IMPLICIT NONE
 !
