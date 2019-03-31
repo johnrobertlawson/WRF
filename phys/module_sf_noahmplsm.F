@@ -3147,7 +3147,10 @@ ENDIF   ! CROPTYPE == 0
                         FWET   ,T       ,ALBGRD  ,ALBGRI  ,RHO    , & !in
                         TAU    ,FVEG    ,IST     ,ILOC    ,JLOC   , & !in
                         FAB    ,FRE     ,FTD     ,FTI     ,GDIR   , & !)   !out
-                        FREV   ,FREG    ,BGAP    ,WGAP)
+                        ! JRL -----------
+                        !FREV   ,FREG    ,BGAP    ,WGAP)
+                        FREV,FREG,BGAP,WGAP,MORPHR_RAD, MORPHTH_RAD)
+                        ! ---------------
 
 ! --------------------------------------------------------------------------------------------------
 ! use two-stream approximation of Dickinson (1983) Adv Geophysics
