@@ -1317,8 +1317,12 @@
 !***  SM AND SH
 !----------------------------------------------------------------------
 !
-        ESM=(BESM*ELOQ2+CESM)*RDEN
-        ESH=(BESH*ELOQ2+CESH)*RDEN
+        ! JRL -------
+        !ESM=(BESM*ELOQ2+CESM)*RDEN
+        !ESH=(BESH*ELOQ2+CESH)*RDEN
+        ESM(K)=(BESM*ELOQ2+CESM)*RDEN
+        ESH(K)=(BESH*ELOQ2+CESH)*RDEN
+        ! ------------
 !
 !----------------------------------------------------------------------
 !***  DIFFUSION COEFFICIENTS
