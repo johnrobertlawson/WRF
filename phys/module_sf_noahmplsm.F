@@ -2148,8 +2148,11 @@ ENDIF   ! CROPTYPE == 0
                   TBOT    ,ZSNSO   ,SSOIL   ,DF      ,HCPCT   , & !in
                   SAG     ,DT      ,SNOWH   ,DZSNSO  , & !in
                   TG      ,ILOC    ,JLOC    ,                   & !in
-                  STC     )                                       !inout
-
+                  ! JRL -----------------
+                                    !STC     )                                       !inout
+                    TC, MORPHR_TBOT,MORPHTH_TBOT )
+                    ! ---------
+                    
 ! adjusting snow surface temperature
      IF(OPT_STC == 2) THEN
       IF (SNOWH > 0.05 .AND. TG > TFRZ) THEN
