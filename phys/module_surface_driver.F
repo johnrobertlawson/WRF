@@ -3015,6 +3015,10 @@ CONTAINS
                 ids,ide, jds,jde, kds,kde,                      &
                 ims,ime, jms,jme, kms,kme,                      &
                 i_start(ij),i_end(ij), j_start(ij),j_end(ij), kts,kte,        &
+                ! JRL ------------
+                 MORPHR_CRS,MORPHTH_CRS,MORPHR_BTR,MORPHTH_BTR, &
+                 MORPHR_RAD,MORPHTH_RAD,MORPHR_TBOT,MORPHTH_TBOT, &
+                ! ----------------
 ! variables below are optional
                 MP_RAINC =  RAINCV, MP_RAINNC =    RAINNCV, MP_SHCV = RAINSHV,&
 		MP_SNOW  = SNOWNCV, MP_GRAUP  = GRAUPELNCV, MP_HAIL = HAILNCV )
