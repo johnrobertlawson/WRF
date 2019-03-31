@@ -282,7 +282,7 @@ contains
     do i = its,ite
       do k = kts+1,kte-1
          ! JRL - just for testing!
-         el_pbl(i,k,j) = 50.0
+         ! el_pbl(i,k,j) = 50.0
          dthdz = (th3d(i,k,j)-th3d(i,k+1,j))/(dz8w(i,k,j))
          tsq(i,k,j) = abs(((-10.1*el_pbl(i,k,j))/(tke_pbl(i,k,j))) * (el_pbl(i,k,j) * &
                   tke_pbl(i,k,j) * xkzhl_3d(i,k,j) * dthdz**2))
