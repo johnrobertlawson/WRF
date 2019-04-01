@@ -1,4 +1,4 @@
-re# Stochastic forcing option, for ARW only
+# Stochastic forcing option, for ARW only
 
 # 3D arrays
 state    real   VERTSTRUCC    ikj  dyn_em 1 -   rd         "VERTSTRUCC"     "vertical structure for stoch. forcing " ""
