@@ -764,10 +764,9 @@ contains
 		 SHG,SHC,SHB,EVG,EVB,GHV,GHB,IRG,IRC,IRB,TR,EVC,CHLEAF,CHUC,CHV2,CHB2,&
          ! JRL -------
                  !JULIAN, SWDOWN, PRCP, FB, GECROS1D )
-                 JULIAN, SWDOWN, PRCP, FB, GECROS1D,
+                 JULIAN, SWDOWN, PRCP, FB, GECROS1D,  &
                  MORPHR_CRS, MORPHTH_CRS, MORPHR_BTR, MORPHTH_BTR, &
-                 MORPHR_RAD,MORPHTH_RAD,MORPHR_TBOT,MORPHTH_TBOT
-                  )
+                 MORPHR_RAD,MORPHTH_RAD,MORPHR_TBOT,MORPHTH_TBOT)
         ! ---------------
 
 !jref:end
