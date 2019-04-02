@@ -2149,7 +2149,7 @@ ENDIF   ! CROPTYPE == 0
                   TG      ,ILOC    ,JLOC    ,                   & !in
                   ! JRL -----------------
                                     !STC     )                                       !inout
-                    TC, MORPHR_TBOT,MORPHTH_TBOT )
+                    STC, MORPHR_TBOT,MORPHTH_TBOT )
                     ! ---------
 
 ! adjusting snow surface temperature
